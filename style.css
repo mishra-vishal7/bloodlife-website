@@ -1,0 +1,718 @@
+/* =========================== */
+/* GLOBAL STYLES */
+/* =========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f8f9fa;
+    color: #333;
+    padding-top: 70px;
+    overflow-x: hidden;
+}
+
+/* =========================== */
+/* NAVBAR */
+/* =========================== */
+.navbar {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+/* =========================== */
+/* HERO SECTION */
+/* =========================== */
+.hero {
+    background: linear-gradient(rgba(220, 53, 69, 0.9), rgba(220, 53, 69, 0.8)),
+                url('https://images.unsplash.com/photo-1551601651-2a8555f1a136?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 100px 0;
+    margin-top: -70px;
+    padding-top: 170px;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.hero-title .highlight {
+    color: #ffd700;
+    display: block;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.hero-btns .btn {
+    padding: 12px 30px;
+    font-weight: 600;
+}
+
+/* =========================== */
+/* BLOOD STATS CARD */
+/* =========================== */
+.blood-stats-card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.blood-stats-card h4 {
+    color: #dc3545;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.blood-groups {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.blood-group {
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.blood-group.high {
+    background: #d4edda;
+    color: #155724;
+    border-left: 4px solid #28a745;
+}
+
+.blood-group.medium {
+    background: #fff3cd;
+    color: #856404;
+    border-left: 4px solid #ffc107;
+}
+
+.blood-group.low {
+    background: #f8d7da;
+    color: #721c24;
+    border-left: 4px solid #dc3545;
+}
+
+.blood-group span {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.update-time {
+    font-size: 0.9rem;
+    color: #666;
+    text-align: center;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+/* =========================== */
+/* STATS SECTION */
+/* =========================== */
+.stats {
+    padding: 80px 0;
+    background: white;
+}
+
+.stat-box {
+    padding: 30px 20px;
+}
+
+.stat-box h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #dc3545;
+    margin-bottom: 10px;
+}
+
+.stat-box p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* =========================== */
+/* SECTION TITLES */
+/* =========================== */
+.section-title {
+    text-align: center;
+    color: #dc3545;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 50px;
+}
+
+/* =========================== */
+/* DONOR MAP SECTION */
+/* =========================== */
+.donor-map {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.map-container {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.map-controls {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    height: 100%;
+}
+
+.map-controls h5 {
+    color: #dc3545;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
+}
+
+.map-stats {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.stat-item {
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.stat-item h4 {
+    color: #dc3545;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+/* =========================== */
+/* ELIGIBILITY SECTION */
+/* =========================== */
+.eligibility {
+    padding: 80px 0;
+    background: white;
+}
+
+.eligibility-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.options {
+    display: grid;
+    gap: 15px;
+}
+
+.btn-option {
+    padding: 15px;
+    text-align: left;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s;
+    background: white;
+}
+
+.btn-option:hover {
+    border-color: #dc3545;
+    background: #fff5f5;
+    transform: translateY(-2px);
+}
+
+/* =========================== */
+/* DONATE SECTION */
+/* =========================== */
+.donate {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.donate .card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* =========================== */
+/* FIND DONOR SECTION */
+/* =========================== */
+.find-donor {
+    padding: 80px 0;
+    background: white;
+}
+
+.search-box {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* =========================== */
+/* DONOR CARDS */
+/* =========================== */
+.donor-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: all 0.3s;
+    margin-bottom: 30px;
+    border: 1px solid #eee;
+}
+
+.donor-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(220, 53, 69, 0.1);
+}
+
+.donor-card .card-body {
+    padding: 25px;
+}
+
+.donor-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.blood-badge {
+    display: inline-block;
+    background: #dc3545;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.donor-info {
+    margin-bottom: 20px;
+}
+
+.donor-info p {
+    margin-bottom: 8px;
+    color: #666;
+}
+
+.donor-info i {
+    width: 20px;
+    margin-right: 10px;
+    color: #dc3545;
+}
+
+/* =========================== */
+/* EMERGENCY SECTION */
+/* =========================== */
+.emergency {
+    padding: 80px 0;
+    background: #fff5f5;
+}
+
+.emergency-alert {
+    border: 2px solid #dc3545;
+}
+
+/* =========================== */
+/* BLOOD BANKS SECTION */
+/* =========================== */
+.blood-banks {
+    padding: 80px 0;
+    background: white;
+}
+
+.bloodbank-list {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    height: 100%;
+}
+
+.bloodbank-item {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.bloodbank-item:hover {
+    background: #f8f9fa;
+}
+
+/* =========================== */
+/* REWARDS SECTION */
+/* =========================== */
+.rewards {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.reward-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    height: 100%;
+    transition: transform 0.3s;
+}
+
+.reward-card:hover {
+    transform: translateY(-5px);
+}
+
+.reward-icon {
+    margin-bottom: 20px;
+    color: #dc3545;
+}
+
+.badges {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.points {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #dc3545;
+    margin: 20px 0;
+}
+
+.leaderboard {
+    text-align: left;
+    margin-top: 20px;
+    padding-left: 20px;
+}
+
+.leaderboard li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+/* =========================== */
+/* FOOTER */
+/* =========================== */
+.footer {
+    background: #343a40;
+    color: white;
+    padding: 60px 0 30px;
+}
+
+.footer h5 {
+    color: white;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+}
+
+.footer ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer ul li {
+    margin-bottom: 10px;
+}
+
+.footer ul li a {
+    color: #adb5bd;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer ul li a:hover {
+    color: #dc3545;
+}
+
+.footer hr {
+    background: #495057;
+    margin: 40px 0;
+}
+
+/* =========================== */
+/* NOTIFICATION SYSTEM STYLES */
+/* =========================== */
+.notification-icon-nav {
+    position: relative;
+    cursor: pointer;
+    padding: 10px;
+    margin-right: 15px;
+}
+
+.nav-notification {
+    position: relative;
+    color: white;
+    font-size: 1.5rem;
+    transition: all 0.3s;
+}
+
+.nav-notification:hover {
+    transform: scale(1.1);
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #ff4757;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border: 2px solid #dc3545;
+    display: none;
+}
+
+/* Notification Panel */
+.notification-panel {
+    position: fixed;
+    top: 70px;
+    right: -400px;
+    width: 350px;
+    height: calc(100vh - 70px);
+    background: white;
+    box-shadow: -5px 0 20px rgba(0,0,0,0.15);
+    z-index: 9998;
+    transition: right 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.notification-panel.show {
+    right: 0;
+}
+
+.notification-header {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #dc3545;
+    color: white;
+}
+
+.notification-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px;
+    background: #f8f9fa;
+}
+
+/* Notification Items */
+.notification-item {
+    display: flex;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-left: 4px solid #dee2e6;
+    background: white;
+}
+
+.notification-item.unread {
+    border-left-color: #dc3545;
+    background: #fff5f5;
+}
+
+.notification-item:hover {
+    background: #f8f9fa;
+    transform: translateX(-5px);
+}
+
+.notification-item-icon {
+    font-size: 1.5rem;
+    margin-right: 15px;
+    min-width: 30px;
+}
+
+.notification-item-title {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.notification-item-message {
+    color: #666;
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+    line-height: 1.4;
+}
+
+.notification-item-time {
+    font-size: 0.75rem;
+    color: #999;
+}
+
+/* Toast Notifications */
+.toast-notification {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    z-index: 99999;
+    animation: slideInRight 0.3s ease;
+    min-width: 320px;
+    max-width: 400px;
+    border-left: 5px solid #dc3545;
+}
+
+.toast-icon {
+    font-size: 1.5rem;
+    margin-right: 15px;
+    color: #dc3545;
+}
+
+/* Custom Notification Alert */
+.custom-notification {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 9999;
+    min-width: 350px;
+    max-width: 400px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    animation: slideInRight 0.3s ease;
+    border-radius: 10px !important;
+    border: none;
+}
+
+/* Animations */
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.fade-out {
+    animation: slideOutRight 0.3s ease forwards !important;
+}
+
+/* =========================== */
+/* RESPONSIVE DESIGN */
+/* =========================== */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .blood-groups {
+        grid-template-columns: 1fr;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .stat-box h2 {
+        font-size: 2.5rem;
+    }
+    
+    body {
+        padding-top: 60px;
+    }
+    
+    .hero {
+        padding-top: 130px;
+    }
+    
+    .notification-panel {
+        width: 100%;
+        right: -100%;
+    }
+    
+    .notification-panel.show {
+        right: 0;
+    }
+    
+    #googleMap {
+        height: 300px;
+    }
+    
+    #bloodbankMap {
+        height: 300px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-btns .btn {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+section {
+    scroll-margin-top: 80px;
+}
