@@ -4,156 +4,207 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BloodLife - Save Lives</title>
-    <!-- Bootstrap 5 -->
+    
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&libraries=places"></script>
+    
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <!-- Notification Panel (Hidden by default) -->
+    <div id="notificationPanel" class="notification-panel">
+        <div class="notification-header">
+            <h5><i class="fas fa-bell me-2"></i>Notifications</h5>
+            <button class="btn btn-sm btn-outline-light" onclick="notificationSystem.markAllAsRead()">
+                Mark all read
+            </button>
+        </div>
+        <div class="notification-list" id="notificationList">
+            <!-- Notifications will appear here -->
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#home">
-                <i class="fas fa-heartbeat me-2"></i>
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-heartbeat fa-lg me-2"></i>
                 <strong>BloodLife</strong>
             </a>
+            
+            <!-- Notification Icon -->
+            <div class="notification-icon-nav">
+                <div class="nav-notification">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">0</span>
+                </div>
+            </div>
+            
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#map">Live Map</a></li>
                     <li class="nav-item"><a class="nav-link" href="#eligibility">Eligibility</a></li>
                     <li class="nav-item"><a class="nav-link" href="#donate">Donate</a></li>
                     <li class="nav-item"><a class="nav-link" href="#find">Find Donor</a></li>
                     <li class="nav-item"><a class="nav-link" href="#emergency">Emergency</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#bloodbanks">Blood Banks</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#rewards">Rewards</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero-section">
+    <section id="home" class="hero">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <h1 class="hero-title">Donate Blood <span class="highlight">Save Lives</span></h1>
-                    <p class="hero-subtitle">Your single donation can save up to 3 lives. Join our community of heroes who give the gift of life.</p>
-                    <div class="hero-buttons">
-                        <a href="#donate" class="btn btn-primary btn-lg me-3">
-                            <i class="fas fa-heart me-2"></i> Become a Donor
+                    <p class="hero-subtitle">Your single donation can save up to 3 lives. Join our community of heroes.</p>
+                    <div class="hero-btns">
+                        <a href="#donate" class="btn btn-light btn-lg me-3">
+                            <i class="fas fa-heart me-2"></i>Become Donor
                         </a>
                         <a href="#emergency" class="btn btn-outline-light btn-lg">
-                            <i class="fas fa-ambulance me-2"></i> Emergency Request
+                            <i class="fas fa-ambulance me-2"></i>Emergency
                         </a>
                     </div>
-                    
-                    <!-- Quick Stats -->
-                    <div class="quick-stats mt-5">
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="stat-box">
-                                    <h3 class="counter" data-count="12500">0</h3>
-                                    <p>Donors</p>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="stat-box">
-                                    <h3 class="counter" data-count="37500">0</h3>
-                                    <p>Lives Saved</p>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="stat-box">
-                                    <h3 class="counter" data-count="87">0</h3>
-                                    <p>Hospitals</p>
-                                </div>
-                            </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="blood-stats-card">
+                        <h4><i class="fas fa-tint me-2"></i>Live Blood Status</h4>
+                        <div class="blood-groups">
+                            <div class="blood-group high">A+ <span>43 Donors</span></div>
+                            <div class="blood-group high">O+ <span>67 Donors</span></div>
+                            <div class="blood-group medium">B+ <span>28 Donors</span></div>
+                            <div class="blood-group medium">AB+ <span>22 Donors</span></div>
+                            <div class="blood-group low">A- <span>12 Donors</span></div>
+                            <div class="blood-group low">B- <span>3 Donors</span></div>
+                            <div class="blood-group medium">O- <span>22 Donors</span></div>
+                            <div class="blood-group low">AB- <span>9 Donors</span></div>
+                        </div>
+                        <div class="update-time">
+                            <i class="fas fa-clock me-1"></i>Updated: <span id="liveTime">Just now</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-3 col-6">
+                    <div class="stat-box">
+                        <h2 class="counter" data-count="12500">0</h2>
+                        <p>Registered Donors</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-box">
+                        <h2 class="counter" data-count="37500">0</h2>
+                        <p>Lives Saved</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-box">
+                        <h2 class="counter" data-count="87">0</h2>
+                        <p>Partner Hospitals</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-box">
+                        <h2 class="counter" data-count="15680">0</h2>
+                        <p>Units Donated</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Donor Map Section -->
+    <section id="map" class="donor-map">
+        <div class="container">
+            <h2 class="section-title">Live Donor Map</h2>
+            <p class="text-center mb-4">Find nearby donors and blood banks in real-time</p>
+            
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card map-container">
+                        <div class="card-body p-0">
+                            <div id="googleMap" style="height: 500px; border-radius: 15px;"></div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Blood Availability Card -->
-                <div class="col-lg-6">
-                    <div class="blood-card">
-                        <div class="card-header">
-                            <h4><i class="fas fa-tint me-2"></i> Live Blood Availability</h4>
-                            <span class="live-badge">LIVE</span>
+                <div class="col-lg-4">
+                    <div class="map-controls">
+                        <h5><i class="fas fa-filter me-2"></i>Filter Map</h5>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Blood Group</label>
+                            <select class="form-control" id="mapBloodFilter">
+                                <option value="ALL">All Blood Groups</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                            </select>
                         </div>
-                        <div class="card-body">
-                            <div class="blood-groups-grid">
-                                <div class="blood-group high">
-                                    <div class="group-header">
-                                        <h5>A+</h5>
-                                        <span class="badge high">High</span>
-                                    </div>
-                                    <p>43 Donors Available</p>
-                                    <small class="critical">Critical: 9 Available</small>
-                                </div>
-                                
-                                <div class="blood-group high">
-                                    <div class="group-header">
-                                        <h5>O+</h5>
-                                        <span class="badge high">High</span>
-                                    </div>
-                                    <p>67 Donors Available</p>
-                                </div>
-                                
-                                <div class="blood-group medium">
-                                    <div class="group-header">
-                                        <h5>B+</h5>
-                                        <span class="badge medium">Medium</span>
-                                    </div>
-                                    <p>28 Donors Available</p>
-                                </div>
-                                
-                                <div class="blood-group medium">
-                                    <div class="group-header">
-                                        <h5>AB+</h5>
-                                        <span class="badge medium">Medium</span>
-                                    </div>
-                                    <p>22 Donors Available</p>
-                                </div>
-                                
-                                <div class="blood-group low">
-                                    <div class="group-header">
-                                        <h5>A-</h5>
-                                        <span class="badge low">Low</span>
-                                    </div>
-                                    <p>12 Donors Available</p>
-                                </div>
-                                
-                                <div class="blood-group medium">
-                                    <div class="group-header">
-                                        <h5>O-</h5>
-                                        <span class="badge medium">Medium</span>
-                                    </div>
-                                    <p>22 Donors Available</p>
-                                </div>
-                                
-                                <div class="blood-group low">
-                                    <div class="group-header">
-                                        <h5>B-</h5>
-                                        <span class="badge low">Low</span>
-                                    </div>
-                                    <p>3 Donors Available</p>
-                                </div>
-                                
-                                <div class="blood-group low">
-                                    <div class="group-header">
-                                        <h5>AB-</h5>
-                                        <span class="badge low">Low</span>
-                                    </div>
-                                    <p>9 Donors Available</p>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Radius</label>
+                            <input type="range" class="form-range" id="radiusSlider" min="1" max="50" value="10">
+                            <div class="d-flex justify-content-between">
+                                <small>1 km</small>
+                                <small id="radiusValue">10 km</small>
+                                <small>50 km</small>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-danger w-100 mb-3" onclick="findNearbyDonors()">
+                            <i class="fas fa-location-arrow me-2"></i>Find Near Me
+                        </button>
+                        
+                        <button class="btn btn-outline-danger w-100" onclick="showAllDonors()">
+                            <i class="fas fa-globe me-2"></i>Show All India
+                        </button>
+                    </div>
+                    
+                    <div class="map-stats mt-4">
+                        <h6><i class="fas fa-chart-bar me-2"></i>Live Stats</h6>
+                        <div class="row text-center">
+                            <div class="col-6">
+                                <div class="stat-item">
+                                    <h4 id="donorsCount">0</h4>
+                                    <small>Donors Nearby</small>
                                 </div>
                             </div>
-                            <div class="update-time">
-                                <i class="fas fa-clock me-2"></i>Updated: 16 Dec 2025, 9:53 PM
+                            <div class="col-6">
+                                <div class="stat-item">
+                                    <h4 id="hospitalsCount">87</h4>
+                                    <small>Hospitals</small>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -163,39 +214,33 @@
     </section>
 
     <!-- Eligibility Checker -->
-    <section id="eligibility" class="eligibility-section">
+    <section id="eligibility" class="eligibility">
         <div class="container">
             <h2 class="section-title">Check Your Eligibility</h2>
-            <p class="section-subtitle">Take 2-minute test to see if you can donate blood</p>
-            
-            <div class="eligibility-card">
-                <div class="progress-container">
-                    <div class="progress">
-                        <div class="progress-bar" id="eligibilityProgress" style="width: 10%"></div>
+            <div class="card eligibility-card">
+                <div class="card-body">
+                    <div class="eligibility-progress">
+                        <div class="progress">
+                            <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+                        </div>
+                        <p>Question <span id="currentQ">1</span>/4</p>
                     </div>
-                    <div class="progress-text">
-                        <span>Question <span id="currentQuestion">1</span>/10</span>
+                    
+                    <div id="questionContainer">
+                        <h4 id="questionText">What is your age?</h4>
+                        <div class="options">
+                            <button class="btn btn-option" data-score="10">18-60 Years</button>
+                            <button class="btn btn-option" data-score="5">61-65 Years</button>
+                            <button class="btn btn-option" data-score="0">Below 18</button>
+                            <button class="btn btn-option" data-score="0">Above 65</button>
+                        </div>
                     </div>
-                </div>
-                
-                <div id="questionContainer">
-                    <h4 id="questionText">What is your age?</h4>
-                    <div class="options" id="optionsContainer">
-                        <button class="option-btn" data-score="10">18-60 Years</button>
-                        <button class="option-btn" data-score="5">61-65 Years</button>
-                        <button class="option-btn" data-score="0">Below 18</button>
-                        <button class="option-btn" data-score="0">Above 65</button>
-                    </div>
-                </div>
-                
-                <div id="resultContainer" style="display: none;">
-                    <div class="result-content">
-                        <div id="resultIcon"></div>
+                    
+                    <div id="resultContainer" style="display: none;">
                         <h3 id="resultTitle"></h3>
                         <p id="resultMessage"></p>
-                        <div id="resultDetails"></div>
-                        <button class="btn btn-primary mt-3" onclick="restartEligibilityTest()">
-                            Take Test Again
+                        <button class="btn btn-danger" onclick="restartTest()">
+                            <i class="fas fa-redo me-2"></i>Retake Test
                         </button>
                     </div>
                 </div>
@@ -204,17 +249,12 @@
     </section>
 
     <!-- Donor Registration -->
-    <section id="donate" class="donate-section">
+    <section id="donate" class="donate">
         <div class="container">
-            <h2 class="section-title">Become a Life Saver</h2>
-            <p class="section-subtitle">Register as a blood donor and help save lives</p>
-            
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="registration-card">
-                        <div class="card-header">
-                            <h4><i class="fas fa-user-plus me-2"></i> Donor Registration</h4>
-                        </div>
+            <h2 class="section-title">Become a Donor</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card">
                         <div class="card-body">
                             <form id="donorForm">
                                 <div class="row">
@@ -225,7 +265,7 @@
                                     <div class="col-md-6 mb-3">
                                         <label>Blood Group *</label>
                                         <select class="form-control" id="donorBlood" required>
-                                            <option value="">Select Blood Group</option>
+                                            <option value="">Select</option>
                                             <option>A+</option><option>A-</option>
                                             <option>B+</option><option>B-</option>
                                             <option>O+</option><option>O-</option>
@@ -233,56 +273,46 @@
                                         </select>
                                     </div>
                                 </div>
-                                
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label>Phone Number *</label>
+                                        <label>Phone *</label>
                                         <input type="tel" class="form-control" id="donorPhone" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label>Email Address (Optional)</label>
-                                        <input type="email" class="form-control" id="donorEmail">
+                                        <label>City *</label>
+                                        <select class="form-control" id="donorCity" required>
+                                            <option value="">Select City</option>
+                                            <option>Delhi</option><option>Mumbai</option>
+                                            <option>Bangalore</option><option>Chennai</option>
+                                            <option>Kolkata</option><option>Hyderabad</option>
+                                            <option>Pune</option><option>Ahmedabad</option>
+                                            <option>Jaipur</option><option>Lucknow</option>
+                                        </select>
                                     </div>
                                 </div>
-                                
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label>City *</label>
-                                        <input type="text" class="form-control" id="donorCity" required>
+                                        <label>Email (Optional)</label>
+                                        <input type="email" class="form-control" id="donorEmail">
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label>Last Donation Date</label>
                                         <input type="date" class="form-control" id="lastDonation">
                                     </div>
                                 </div>
-                                
-                                <div class="mb-4">
-                                    <label>Availability Status *</label>
-                                    <div class="availability-options">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="availability" id="availableNow" value="available" checked>
-                                            <label class="form-check-label" for="availableNow">
-                                                <i class="fas fa-check-circle text-success me-1"></i> Available Now
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="availability" id="availableWeek" value="week">
-                                            <label class="form-check-label" for="availableWeek">
-                                                <i class="fas fa-calendar-check text-warning me-1"></i> Available This Week
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="availability" id="notAvailable" value="not-available">
-                                            <label class="form-check-label" for="notAvailable">
-                                                <i class="fas fa-times-circle text-danger me-1"></i> Not Available
-                                            </label>
-                                        </div>
-                                    </div>
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="termsCheck" required>
+                                    <label class="form-check-label" for="termsCheck">
+                                        I agree to receive notifications about blood donations and emergencies
+                                    </label>
                                 </div>
-                                
-                                <button type="submit" class="btn btn-primary btn-lg w-100">
-                                    <i class="fas fa-heart me-2"></i> Register as Donor
+                                <button type="submit" class="btn btn-danger btn-lg w-100">
+                                    <i class="fas fa-heart me-2"></i>Register as Donor
                                 </button>
+                                <p class="text-muted mt-3 text-center small">
+                                    <i class="fas fa-info-circle me-1"></i>
+                                    You'll receive confirmation notification immediately
+                                </p>
                             </form>
                         </div>
                     </div>
@@ -292,16 +322,12 @@
     </section>
 
     <!-- Find Donor -->
-    <section id="find" class="find-section">
+    <section id="find" class="find-donor">
         <div class="container">
-            <h2 class="section-title">Find a Blood Donor</h2>
-            <p class="section-subtitle">Search from our database of verified donors</p>
-            
-            <!-- Search Box -->
-            <div class="search-card">
+            <h2 class="section-title">Find Blood Donors</h2>
+            <div class="search-box mb-4">
                 <div class="row g-3">
                     <div class="col-md-4">
-                        <label>Blood Group</label>
                         <select class="form-control" id="searchBlood">
                             <option value="">All Blood Groups</option>
                             <option>A+</option><option>A-</option>
@@ -311,38 +337,41 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <label>City</label>
-                        <input type="text" class="form-control" id="searchCity" placeholder="Enter city name">
+                        <select class="form-control" id="searchCity">
+                            <option value="">All Cities</option>
+                            <option>Delhi</option><option>Mumbai</option>
+                            <option>Bangalore</option><option>Chennai</option>
+                            <option>Kolkata</option><option>Hyderabad</option>
+                        </select>
                     </div>
                     <div class="col-md-4">
-                        <label>&nbsp;</label>
-                        <button class="btn btn-primary w-100" onclick="searchDonors()">
-                            <i class="fas fa-search me-2"></i> Search Donors
+                        <button class="btn btn-danger w-100" onclick="searchDonors()">
+                            <i class="fas fa-search me-2"></i>Search Donors
                         </button>
                     </div>
                 </div>
             </div>
             
-            <!-- Donor Results -->
-            <div class="row mt-5" id="donorResults">
-                <!-- Results will be loaded here -->
+            <div class="row" id="donorResults">
+                <!-- Donors will appear here -->
             </div>
         </div>
     </section>
 
-    <!-- Emergency Request -->
-    <section id="emergency" class="emergency-section">
+    <!-- Emergency Section -->
+    <section id="emergency" class="emergency">
         <div class="container">
             <h2 class="section-title">Emergency Blood Request</h2>
-            <p class="section-subtitle">Need blood urgently? Submit request for immediate help</p>
-            
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="emergency-card">
-                        <div class="card-header">
-                            <h4><i class="fas fa-ambulance me-2"></i> Emergency Request Form</h4>
-                        </div>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card emergency-alert">
                         <div class="card-body">
+                            <div class="alert alert-warning d-flex align-items-center mb-4">
+                                <i class="fas fa-exclamation-triangle fa-2x me-3"></i>
+                                <div>
+                                    <strong>Emergency Alert:</strong> This will notify all matching donors immediately
+                                </div>
+                            </div>
                             <form id="emergencyForm">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
@@ -352,7 +381,7 @@
                                     <div class="col-md-6 mb-3">
                                         <label>Blood Group Needed *</label>
                                         <select class="form-control" id="emergencyBlood" required>
-                                            <option value="">Select Blood Group</option>
+                                            <option value="">Select</option>
                                             <option>A+</option><option>A-</option>
                                             <option>B+</option><option>B-</option>
                                             <option>O+</option><option>O-</option>
@@ -360,10 +389,9 @@
                                         </select>
                                     </div>
                                 </div>
-                                
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label>Hospital / Location *</label>
+                                        <label>Hospital *</label>
                                         <input type="text" class="form-control" id="hospital" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
@@ -371,39 +399,43 @@
                                         <input type="tel" class="form-control" id="emergencyContact" required>
                                     </div>
                                 </div>
-                                
-                                <div class="mb-4">
-                                    <label>Urgency Level *</label>
-                                    <div class="urgency-options">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="urgency" id="critical" value="critical" required>
-                                            <label class="form-check-label" for="critical">
-                                                <i class="fas fa-exclamation-triangle text-danger me-1"></i> Critical (Within 1 hour)
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="urgency" id="urgent" value="urgent" required>
-                                            <label class="form-check-label" for="urgent">
-                                                <i class="fas fa-exclamation-circle text-warning me-1"></i> Urgent (2-4 hours)
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="urgency" id="normal" value="normal" required>
-                                            <label class="form-check-label" for="normal">
-                                                <i class="fas fa-info-circle text-primary me-1"></i> Normal (Within 24 hours)
-                                            </label>
-                                        </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label>City *</label>
+                                        <select class="form-control" id="emergencyCity" required>
+                                            <option value="">Select City</option>
+                                            <option>Delhi</option><option>Mumbai</option>
+                                            <option>Bangalore</option><option>Chennai</option>
+                                            <option>Kolkata</option><option>Hyderabad</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label>Urgency Level *</label>
+                                        <select class="form-control" id="urgencyLevel" required>
+                                            <option value="">Select Urgency</option>
+                                            <option value="critical">Critical (Within 1 hour)</option>
+                                            <option value="urgent">Urgent (2-4 hours)</option>
+                                            <option value="normal">Normal (24 hours)</option>
+                                        </select>
                                     </div>
                                 </div>
-                                
-                                <div class="mb-4">
-                                    <label>Units Required</label>
-                                    <input type="number" class="form-control" id="unitsRequired" min="1" max="10" value="1">
+                                <div class="mb-3">
+                                    <label>Additional Notes</label>
+                                    <textarea class="form-control" id="emergencyNotes" rows="3" placeholder="Any special requirements or notes..."></textarea>
                                 </div>
-                                
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="emergencyConsent" required>
+                                    <label class="form-check-label" for="emergencyConsent">
+                                        I confirm this is a genuine emergency request
+                                    </label>
+                                </div>
                                 <button type="submit" class="btn btn-danger btn-lg w-100">
-                                    <i class="fas fa-bell me-2"></i> Send Emergency Request
+                                    <i class="fas fa-bell me-2"></i>Send Emergency Alert
                                 </button>
+                                <p class="text-muted mt-3 text-center small">
+                                    <i class="fas fa-bell me-1"></i>
+                                    Matching donors will receive immediate notifications
+                                </p>
                             </form>
                         </div>
                     </div>
@@ -412,36 +444,75 @@
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="about-section">
+    <!-- Blood Banks Section -->
+    <section id="bloodbanks" class="blood-banks">
         <div class="container">
-            <h2 class="section-title">About BloodLife</h2>
+            <h2 class="section-title">Find Blood Banks</h2>
             <div class="row">
-                <div class="col-lg-4 mb-4">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-shield-alt"></i>
+                <div class="col-lg-8">
+                    <div class="search-container mb-4">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="bloodbankSearch" placeholder="Search blood banks by city or name...">
+                            <button class="btn btn-danger" onclick="searchBloodBanks()">
+                                <i class="fas fa-search"></i>
+                            </button>
                         </div>
-                        <h4>Safe & Secure</h4>
-                        <p>Verified donors and secure platform ensuring safety for everyone.</p>
+                    </div>
+                    <div id="bloodbankMap" style="height: 400px; border-radius: 15px;"></div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="bloodbank-list">
+                        <h5><i class="fas fa-list me-2"></i>Nearby Blood Banks</h5>
+                        <div id="bloodbankResults">
+                            <!-- Blood banks list will appear here -->
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-4 mb-4">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-bolt"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rewards Section -->
+    <section id="rewards" class="rewards">
+        <div class="container">
+            <h2 class="section-title">Earn Rewards</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="reward-card">
+                        <div class="reward-icon">
+                            <i class="fas fa-medal fa-3x"></i>
                         </div>
-                        <h4>Quick Response</h4>
-                        <p>Emergency requests get immediate attention from nearby donors.</p>
+                        <h4>Badges</h4>
+                        <p>Earn badges for donations</p>
+                        <div class="badges">
+                            <span class="badge bg-danger">First Donor</span>
+                            <span class="badge bg-warning">Regular</span>
+                            <span class="badge bg-success">Hero</span>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-4 mb-4">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-handshake"></i>
+                <div class="col-md-4 mb-4">
+                    <div class="reward-card">
+                        <div class="reward-icon">
+                            <i class="fas fa-star fa-3x"></i>
                         </div>
-                        <h4>Trusted Network</h4>
-                        <p>Connected with hospitals and verified donors across the country.</p>
+                        <h4>Points</h4>
+                        <p>Earn points for every donation</p>
+                        <h2 class="points">1,250</h2>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="reward-card">
+                        <div class="reward-icon">
+                            <i class="fas fa-trophy fa-3x"></i>
+                        </div>
+                        <h4>Leaderboard</h4>
+                        <p>Top donors this month</p>
+                        <ol class="leaderboard">
+                            <li>Rahul Sharma - 5 donations</li>
+                            <li>Priya Singh - 4 donations</li>
+                            <li>Amit Verma - 3 donations</li>
+                        </ol>
                     </div>
                 </div>
             </div>
@@ -452,65 +523,41 @@
     <footer class="footer">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 mb-4">
-                    <div class="footer-brand">
-                        <h3><i class="fas fa-heartbeat me-2"></i>BloodLife</h3>
-                        <p>Saving lives through blood donation</p>
-                    </div>
+                <div class="col-md-4">
+                    <h5><i class="fas fa-heartbeat me-2"></i>BloodLife</h5>
+                    <p>Save lives through blood donation</p>
+                    <p class="small">
+                        <i class="fas fa-bell me-1"></i>
+                        Instant notifications for emergencies
+                    </p>
                 </div>
-                <div class="col-lg-4 mb-4">
+                <div class="col-md-4">
                     <h5>Quick Links</h5>
-                    <ul class="footer-links">
+                    <ul>
                         <li><a href="#home">Home</a></li>
-                        <li><a href="#donate">Donate Blood</a></li>
-                        <li><a href="#find">Find Donor</a></li>
+                        <li><a href="#map">Live Map</a></li>
+                        <li><a href="#donate">Donate</a></li>
                         <li><a href="#emergency">Emergency</a></li>
+                        <li><a href="#bloodbanks">Blood Banks</a></li>
+                        <li><a href="#" onclick="notificationSystem.toggleNotificationPanel(); return false;">Notifications</a></li>
                     </ul>
                 </div>
-                <div class="col-lg-4 mb-4">
-                    <h5>Contact Us</h5>
-                    <div class="contact-info">
-                        <p><i class="fas fa-phone me-2"></i> Emergency: 104</p>
-                        <p><i class="fas fa-envelope me-2"></i> help@bloodlife.org</p>
-                        <p><i class="fas fa-map-marker-alt me-2"></i> Available 24/7</p>
-                    </div>
+                <div class="col-md-4">
+                    <h5>Contact</h5>
+                    <p><i class="fas fa-phone me-2"></i>Emergency: 104</p>
+                    <p><i class="fas fa-envelope me-2"></i>help@bloodlife.org</p>
+                    <p><i class="fas fa-map-marker-alt me-2"></i>Live Map Active</p>
                 </div>
             </div>
             <hr>
-            <div class="footer-bottom">
-                <p>&copy; 2023 BloodLife. All rights reserved. | Hackathon Project</p>
-            </div>
+            <p class="text-center">© 2023 BloodLife | Hackathon Project | Live Map & Notification System</p>
         </div>
     </footer>
 
-    <!-- Notification Bell -->
-    <div class="notification-bell" onclick="toggleNotifications()">
-        <i class="fas fa-bell"></i>
-        <span class="notification-count" id="notificationCount">0</span>
-    </div>
-
-    <!-- Notification Panel -->
-    <div class="notification-panel" id="notificationPanel">
-        <div class="panel-header">
-            <h5>Notifications</h5>
-            <button class="close-btn" onclick="toggleNotifications()">&times;</button>
-        </div>
-        <div class="panel-body" id="notificationList">
-            <div class="notification-item">
-                <div class="notification-icon">
-                    <i class="fas fa-info-circle"></i>
-                </div>
-                <div class="notification-content">
-                    <h6>Welcome to BloodLife!</h6>
-                    <p>Register as a donor or search for blood when needed.</p>
-                    <small>Just now</small>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Scripts -->
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
     <script src="script.js"></script>
 </body>
 </html>
